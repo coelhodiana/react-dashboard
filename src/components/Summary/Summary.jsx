@@ -21,6 +21,11 @@ class Summary extends Component {
         }
     }
 
+    componentDidMount(){
+        fetch("http://www.devup.com.br/php/api-dashboard/api/resumo")
+        .then(resultado => resultado.json().then(dados => this.setState(dados)));
+    }
+
     render() {
         return (
             <div>
@@ -38,7 +43,7 @@ class Summary extends Component {
                                     </div>
 
                                     <div className="card-body">
-                                        {this.state.consultas.consultas_30dias_anteriores}
+                                        {this.state.consultas.consultas_30dias_anteiores}
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +80,7 @@ class Summary extends Component {
                                                         currency: "BRL"
                                                     })
                                         }
-                                        <span className="badge ml-1 badge-success">
+                                        <span className={ "badge ml-1 " + (this.state.faturamento.anterior.comparativo > 0 ? "badge-success" : "badge-danger") }>
                                             {
                                                 this.state.faturamento.anterior.comparativo
                                             } %
@@ -94,7 +99,7 @@ class Summary extends Component {
                                         {
                                             this.state.faturamento.previsao.valor.toLocaleString("pt-BR",{style: "currency", currency: "BRL"})
                                         }
-                                        <span className="badge ml-1 badge-danger">
+                                        <span className={ "badge ml-1 " + (this.state.faturamento.previsao.comparativo > 0 ? "badge-success" : "badge-danger") }>
                                             {
                                                 this.state.faturamento.previsao.comparativo
                                             } %
