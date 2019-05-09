@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { consultarResumo } from "./../../services/summary";
 
 class Summary extends Component {
     constructor(props) {
@@ -22,10 +23,9 @@ class Summary extends Component {
     }
 
     componentDidMount(){
-        fetch("http://www.devup.com.br/php/api-dashboard/api/resumo")
-        .then(resultado => resultado.json().then(dados => this.setState(dados)));
+        consultarResumo().then(dados => this.setState(dados));
     }
-
+    
     render() {
         return (
             <div>

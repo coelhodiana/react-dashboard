@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { tiposDeConsultas } from "./../../services/appointments";
 
 class Appointments extends Component {
     constructor(props) {
@@ -10,14 +11,13 @@ class Appointments extends Component {
     }
 
     componentDidMount() {
-        fetch("http://www.devup.com.br/php/api-dashboard/api/consultas")
-            .then(resultado => resultado.json().then(dados => this.setState(dados)));
+        tiposDeConsultas().then(dados => this.setState(dados));
     }
 
     render() {
         return (
             <div>
-                <h3 className="mt-2">Consultas</h3>
+                <h2 className="mt-2">Consultas</h2>
 
                 <div className="row">
                     <div className="col">
@@ -32,7 +32,7 @@ class Appointments extends Component {
                                         <th>Quantidade</th>
                                     </tr>
                                 </thead>
-                                <body>
+                                <tbody>
                                     {
                                         this.state.realizadas.map((item, indice) => {
                                             return (
@@ -43,7 +43,7 @@ class Appointments extends Component {
                                             )
                                         })
                                     }
-                                </body>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ class Appointments extends Component {
                                         <th>Quantidade</th>
                                     </tr>
                                 </thead>
-                                <body>
+                                <tbody>
                                     {
                                         this.state.marcadas.map((item, indice) => {
                                             return (
@@ -71,7 +71,7 @@ class Appointments extends Component {
                                             )
                                         })
                                     }
-                                </body>
+                                </tbody>
                             </table>
                         </div>
                     </div>
